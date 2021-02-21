@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+
+	<title>Time Log</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body ng-app="timeLogApp" ng-controller="timeLogController" class="container">
+	
+	<h1>Time Log</h1>
+
+	<form novalidate name="form" ng-submit="form.$valid && addTimelog(timelog)" class="form-inline">
+		<input type="number" placeholder="ID" ng-model="timelog.id" class="form-control" min="100" required>
+		<input type="text" placeholder="DEVELOPER NAME" ng-model="timelog.name" class="form-control" required>
+		<input type="text" id="project-key" placeholder="SELECT A PROJECT" ng-model="timelog.project" class="form-control" required>
+		<input type="date" placeholder="yyyy-MM-dd" ng-model="timelog.date" class="form-control" required>   
+		<input type="time" placeholder="hh : mm : ss" ng-model="timelog.time" class="form-control" required>   
+		<input type="submit" value="Add" class="btn btn-primary btn-sm" ng-show="editId==undefined"/>
+		<input type="button" value="Update" class="btn btn-primary btn-sm" ng-click="updateTimelog(timelog)" ng-hide="editId==undefined" />
+		<input type="submit" value="Cancel" class="btn btn-warning btn-sm" ng-click="cancelTimelog(timelog)" ng-hide="editId==undefined"/>
+	</form>
+
+	<table class="table table-condensed">
+		 <thead>
+    		<th class="col-sm-1">ID</th>
+    		<th class="col-sm-3">NAME</th>
+    		<th class="col-sm-2">PROJECT</th>
+    		<th class="col-sm-2">DATE</th>
+    		<th class="col-sm-2">TIME</th>
+    		<th class="col-sm-2"></th>
+    		<th class="col-sm-1"></th>
+  		</thead>
+		
+		<tbody ng-repeat="timelog in timelogs">
+			<tr>
+				<td>{{timelog.id}}</td>
+      			<td>{{timelog.name}}</td>
+      			<td>{{timelog.project}}</td>
+      			<td>{{timelog.date | date:'yyyy-MM-dd'}}</td>
+        		<td>{{timelog.time | date: "HH:mm:ss"}}</td>
+				<td>
+					<a href="javascript:void(0);" ng-click="editTimelog($index)" class="btn btn-primary btn-sm">Edit</a></td>
+				<td>	
+					<a href="javascript:void(0);" ng-click="deleteTimelog($index)">
+						<span class="glyphicon glyphicon-remove" ng-click="$ctrl.deleteTimelog(timelog)"></span>
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	<table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>

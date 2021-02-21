@@ -1,0 +1,14 @@
+{
+  "name": "time-log",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A mini project",
+  "repository": "https://github.com/jjowcl01/mytimelog",
+  "license": "MIT",
+  "local-web-server": {
+    "port": 8100
+  },
+  "scripts": {
+    "start": "ws"
+  }
+}
